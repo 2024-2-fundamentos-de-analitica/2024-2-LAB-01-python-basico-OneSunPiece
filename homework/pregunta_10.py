@@ -20,3 +20,19 @@ def pregunta_10():
 
 
     """
+    grupos = []
+    
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            
+            columns = line.strip().split('\t')
+            letra = columns[0] 
+            columna3 = columns[3].split(",")
+            valor3 = len(columna3)
+            columna4 = columns[4].split(",")
+            valor4 = len(columna4)
+            
+            grupos.append((letra, valor3, valor4))
+
+
+    return grupos

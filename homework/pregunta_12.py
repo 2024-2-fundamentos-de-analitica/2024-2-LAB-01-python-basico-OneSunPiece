@@ -15,3 +15,22 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    grupos = []
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split('\t')
+            column = columns[4].split(",")
+            for pareja in column:
+                pareja = pareja.split(":") 
+                valor = pareja[1] 
+                grupos.append((columns[0], int(valor)))
+
+    grupos = sorted(grupos, key=lambda x: x[0])
+    
+    result = {}
+    for key, value in grupos:
+        if key not in result.keys():
+            result[key] = 0
+        result[key] += value
+
+    return result

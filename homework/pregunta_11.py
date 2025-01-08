@@ -16,3 +16,20 @@ def pregunta_11():
 
 
     """
+    sequence = []
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split('\t')
+            letras = columns[3].split(",")
+            for letra in letras:
+                sequence.append((letra, int(columns[1])))
+
+    sequence = sorted(sequence, key=lambda x: x[0])
+    
+    result = {}
+    for key, value in sequence:
+        if key not in result.keys():
+            result[key] = 0
+        result[key] += value
+
+    return result

@@ -26,3 +26,27 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        month_frequency = dict()
+        # iterate over the lines
+        for index,line in enumerate(file):
+            # split the line
+            line:list[str] = line.strip().split('	')
+            # Date
+            date = line[2]
+            # get the month
+            month = date.split('-')[1]
+            print(month)
+            # if the month is not in the list add it
+            if month not in month_frequency.keys():
+                month_frequency[month] = 1
+            # if is in the list add 1 to the count
+            else:
+                month_frequency[month] += 1
+        # convert to the list of tuples
+        month_frequency = list(month_frequency.items())
+        # sort
+        month_frequency = sorted(month_frequency, key=lambda x: x[0])
+        # transform the month to string
+        month_frequency = [(str(month), count) for month, count in month_frequency ]
+    return month_frequency

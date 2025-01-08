@@ -26,3 +26,29 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    grupos = {}
+    
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            
+            columns = line.strip().split('\t')
+            column = columns[4].split(",")
+            for pareja in column:
+                pareja = pareja.split(":") 
+                clave = pareja[0]
+                valor = int(pareja[1]) 
+            
+                if clave not in grupos:
+                    grupos[clave] = []
+                grupos[clave].append(valor)
+
+
+    resultado = []
+    for clave, valores in grupos.items():
+        maximo = max(valores)
+        minimo = min(valores)
+        resultado.append((clave, minimo, maximo))
+
+    resultado = sorted(resultado, key=lambda x: x[0])
+
+    return resultado

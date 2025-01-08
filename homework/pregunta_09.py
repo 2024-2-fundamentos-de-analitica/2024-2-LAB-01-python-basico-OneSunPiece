@@ -24,3 +24,24 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    grupos = []
+    
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            
+            columns = line.strip().split('\t')
+            column = columns[4].split(",")
+            for pareja in column:
+                pareja = pareja.split(":") 
+                clave = pareja[0] 
+                grupos.append((clave, 1))
+    
+    grupos = sorted(grupos, key=lambda x: x[0])
+
+    result = {}
+    for key, value in grupos:
+        if key not in result.keys():
+            result[key] = 0
+        result[key] += value
+
+    return result
